@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "node src/index.ts",
+    "add": "node src/add.ts",
+    "change": "node src/change.ts",
     "build": "npx tsc src/index.ts --outDir dist"
   },
   "keywords": [],

@@ -1,4 +1,4 @@
-export const prompt = `
+export const changePrompt = `
 You will be given a single English word.
 "{{WORD}}" is this word.
 Produce ONLY a single valid JSON object (no extra text, no markdown, no explanations) with exactly these three fields:
@@ -35,7 +35,7 @@ ADDITIONAL RULES:
 `;
 
 
-export const repairPrompt = `
+export const repairChangePrompt = `
 The previous response caused a JSON parsing error and is INVALID.
 
 Error information: "{{ERROR_INFO}}"
@@ -81,4 +81,68 @@ CRITICAL RULES:
 - Do NOT explain anything.
 
 Input word: "{{WORD}}"
+`;
+
+
+export const addPrompt = `
+You will be given a single English word and an array of allowed types.
+Your task is to determine **exactly one type** from the provided array that the word belongs to.
+If it is impossible to determine the type, use "Unknow".
+Do NOT invent any new types; use only the types provided.
+
+Additional rules:
+1) If the word is a noun, prepend the correct article ("a", "an", or "the") before the word.
+2) If the word is a verb, prepend "to" before the word.
+3) If the word is an irregular verb, do NOT use "to", but provide all three forms separated by slashes: form1/form2/form3.
+4) Translate the word into Ukrainian.
+
+Input placeholders:
+- Word: "{{WORD}}"
+- Allowed types array: {{TYPES_ARRAY}}
+
+Output requirements:
+- Must be valid JSON parseable by JSON.parse
+- Use exactly these fields:
+
+{
+  "word": string,       // The word with article or "to" or irregular forms as described
+  "desk": string,       // The type/category from the allowed types or "Unknow"
+  "translate": string   // Ukrainian translation of the word
+}
+
+Do NOT output any extra text, explanation, or markdown. Only output the JSON.
+`;
+
+
+export const repairAddPrompt = `
+The previous response caused a JSON parsing error and is INVALID.
+
+Error information: "{{ERROR_INFO}}"
+
+Your task is to FIX the output and return a CORRECT response.
+
+You will be given a single English word and an array of allowed types.
+Do NOT invent any new types; use only the types provided.
+
+Additional rules (same as original prompt):
+1) If the word is a noun, prepend the correct article ("a", "an", or "the") before the word.
+2) If the word is a verb, prepend "to" before the word.
+3) If the word is an irregular verb, do NOT use "to", but provide all three forms separated by slashes: form1/form2/form3.
+4) Translate the word into Ukrainian.
+
+Input placeholders:
+- Word: "{{WORD}}"
+- Allowed types array: {{TYPES_ARRAY}}
+
+Output requirements:
+- Must be valid JSON parseable by JSON.parse
+- Use exactly these fields:
+
+{
+  "word": string,       // The word with article or "to" or irregular forms as described
+  "desk": string,       // The type/category from the allowed types or "Unknow"
+  "translate": string   // Ukrainian translation of the word
+}
+
+Do NOT output any extra text, explanation, or markdown. Only output the JSON.
 `;

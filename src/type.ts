@@ -3,7 +3,12 @@ export type ConfigApp = {
     ollamaKey: string
 }
 
-export type findCardsResult = {
+export type FindCardsResult = {
+    "result": number[],
+    "error": null
+}
+
+export type AddCardResult = {
     "result": number[],
     "error": null
 }
@@ -20,5 +25,10 @@ export type Note = {
 
 export type CardsToNotesResult = {
     "result": Note[],
+    "error": null
+}
+
+export type DeskNames = {
+    "result": string[],
     "error": null
 }
